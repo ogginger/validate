@@ -66,33 +66,6 @@ define([
         "ExpectedOutput": true
       });
 
-      
-      xTestSuite.add({
-        "Name": "validate_InputHasNoValidationMethod_throwsErrorNoValidation",
-        "Input": {
-		"Data": undefined
-	},
-        "Function": function( Input ) {
-		var bResult = false;
-		
-		try {
-			validate( Input );
-		} catch( Error ) {
-			if (
-				bIsObjectEqual(
-					Error,
-					{ "message": "Error: No input validation was given!" }
-				)
-			) {
-				bResult = true;
-			}
-		}
-
-		return bResult;
-	},
-        "ExpectedOutput": true
-      });
-      
       xTestSuite.test();
     }
   });
