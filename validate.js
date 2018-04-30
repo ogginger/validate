@@ -1,17 +1,30 @@
 //validate.js: Functional Logic.
 
 define([
-	"jquery",
-	"underscore"
+	"underscore",
+	"log"
 ], function(
-	$,
-	_
+	_,
+	log
 ) {
   return function( Input ) {
-	if (_.has( Input, "Validate" )) {
-		if (_.isFunction( Input.Validate ) === false) {
-			throw { "message": "Error: Input validation type was not function!" };
-		}
+	if (
+		_.has( Input, "Validation" )
+	) {
+		if (_.isArray( Input.Validation ) === false) {
+			throw { "message": "Error: Validation type was not array!" };
+		} else if (
+			_.every( Input.Validation, function( Validation ) {
+				return _.isFunction( Validation );
+			}) === false &&
+			_.isEmpty( Input.Validation ) === false
+		) {
+			throw { "message": "Error: Validation element type was not function!" };
+		} else {
+			return _.every( Input.Validation, function( Element ) {
+				return Element( Input.Data );
+			});
+		}		
 	}
   };
 });

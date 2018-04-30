@@ -2,14 +2,26 @@
 
 define([
   "TestSuite",
-  "Functions/log",
+  "log",
   "Functions/bIsObjectEqual",
-  "validate"
+  "validate",
+  "tests/validate_Data_EmptyValidation_ThrowsNoError",
+  "tests/validate_Data_ValidationNotArray_ThrowsErrorValidationNotArray",
+  "tests/validate_Data_ValidationArrayMemberNotFunction_ThrowsErrorValidationArrayMemberNotFunction",
+  "tests/validate_Data_SimpleValidationFails_ThrowsError",
+  "tests/validate_Data_MultipleValidationsFail_ThrowsErrorFirstError",
+  "tests/validate_Data_AllValidationsPass_ReturnsTrue"
 ], function(
   TestSuite,
   log,
   bIsObjectEqual,
-  validate
+  validate,
+  validate_Data_EmptyValidation_ThrowsNoError,
+  validate_Data_ValidationNotArray_ThrowsErrorValidationNotArray,
+  validate_Data_ValidationArrayMemberNotFunction_ThrowsErrorValidationArrayMemberNotFunction,
+  validate_Data_SimpleValidationFails_ThrowsError,
+  validate_Data_MultipleValidationsFail_ThrowsErrorFirstValidationError,
+  validate_Data_AllValidationsPass_ReturnsTrue
 ) {
   return TestSuite.extend({
     "initialize": function() {
@@ -17,54 +29,13 @@ define([
       var xTestSuite = this;
       xTestSuite.set( "MethodUnderTest", "validate" );
 
-      xTestSuite.add({
-        "Name": "validate_Data_Validate_DoesNotThrowErrors",
-        "Input": {
-                "Data": "abc",
-                "Validate": function( Input ) {
-			//ThrowsNoErrors
-		}
-        },      
-        "Function": function( Input ) {
-                var bResult = true;
 
-                try {   
-                        validate( Input );
-                } catch( Error ) {
-                        bResult = false;
-                }
-                
-                return bResult;
-        },
-        "ExpectedOutput": true
-      });
-
-      xTestSuite.add({
-        "Name": "validate_InputValidationIsNotFunction_throwsErrorValidationNotFunction",
-        "Input": {
-                "Data": undefined,
-                "Validate": undefined
-        },      
-        "Function": function( Input ) {
-                var bResult = false;
-
-                try {
-                        validate( Input );
-                } catch( Error ) {
-                        if (
-                                bIsObjectEqual(
-                                        Error,
-                                        { "message": "Error: Input validation type was not function!" }
-                                )
-                        ) {
-                                bResult = true;
-                        }
-                }
-
-                return bResult;
-        },
-        "ExpectedOutput": true
-      });
+	xTestSuite.add( validate_Data_EmptyValidation_ThrowsNoError );
+	xTestSuite.add( validate_Data_ValidationNotArray_ThrowsErrorValidationNotArray );
+	xTestSuite.add( validate_Data_ValidationArrayMemberNotFunction_ThrowsErrorValidationArrayMemberNotFunction );
+	xTestSuite.add( validate_Data_SimpleValidationFails_ThrowsError );
+	xTestSuite.add( validate_Data_MultipleValidationsFail_ThrowsErrorFirstValidationError );
+	xTestSuite.add( validate_Data_AllValidationsPass_ReturnsTrue );
 
       xTestSuite.test();
     }
