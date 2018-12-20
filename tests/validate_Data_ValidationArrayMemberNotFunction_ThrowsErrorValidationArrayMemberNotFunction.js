@@ -18,9 +18,7 @@ define([ "validate" ], function( validate ) {
 			}
 		},
 		"ExpectedOutput": { "message": "Error: Validation element type was not function!" },
-		"Comparator": {
-			"Object": true,
-			"Debug": false
-		}
+		"Debug": true,
+		"Comparator": { "Object": true }
 	};
 });

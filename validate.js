@@ -1,11 +1,9 @@
 //validate.js: Functional Logic.
 
 define([
-	"underscore",
-	"log"
+	"underscore"
 ], function(
-	_,
-	log
+	_
 ) {
   return function( Input ) {
 	if (

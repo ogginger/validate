@@ -7,20 +7,8 @@ define([ "validate" ], function( validate ) {
 			"Data": "abc",
 			"Validation": []
 		},
-		"Function": function( Input ) {
-			var Result = { "message": "No Error Thrown." };
-			try {
-				validate( Input );
-			} catch ( Error ) {
-				Result = Error;
-			} finally {
-				return Result;
-			}
-		},
-		"ExpectedOutput": { "message": "No Error Thrown." },
-		"Comparator": {
-			"Object": true,
-			"Debug": false
-		}
+		"Function": validate,
+		"ExpectedOutput": true,
+		"Debug": false
 	};
 });

@@ -8,19 +8,11 @@ define([ "validate" ], function( validate ) {
 			"Validation": undefined
 		},
 		"Function": function( Input ) {
-			var Result = { "message": "No Error Thrown." };
-			try {
-				validate( Input );
-			} catch ( Error ) {
-				Result = Error;
-			} finally {
-				return Result;
-			}
+			validate( Input );
+			return false;
 		},
+		"ExceptionTest": true,
 		"ExpectedOutput": { "message": "Error: Validation type was not array!" },
-		"Comparator": {
-			"Object": true,
-			"Debug": false
-		}
+		"Debug": true
 	};
 });

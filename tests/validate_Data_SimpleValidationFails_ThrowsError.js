@@ -28,7 +28,7 @@ define([ "validate", "underscore" ], function( validate, _ ) {
 		"ExpectedOutput": { "message": "Error: Input type was not string!" },
 		"Comparator": {
 			"Object": true,
-			"Debug": false
+			"Debug": true
 		}
 	};
 });
